@@ -1,5 +1,16 @@
 
-const PlaylistTable = () => {
+
+const PlaylistTable = ({playlists, setSelectedPlaylist, setGenres, setTracks, setPage}) => {
+
+    const handleClickPlaylist = async (playlistName) => {
+        const selectedPlaylist = playlists.filter( x => x.name === playlistName )
+        setSelectedPlaylist( selectedPlaylist[0] )
+        // setGenres(selectedPlaylist.playlist)
+        setGenres(["All", ...new Set(selectedPlaylist[0].playlist.map( x => x.genre))]);
+        setTracks(selectedPlaylist[0].playlist)
+        setPage(1)
+    }
+
     return (
     <table class="table table-hover table-dark" id="bootstrap-override">
     <thead>
@@ -8,15 +19,11 @@ const PlaylistTable = () => {
         </tr>
     </thead>
     <tbody>
-        <tr>
-        <td>Playlist 1</td>
-        </tr>
-        <tr>
-        <td>Playlist 2</td>
-        </tr>
-        <tr>
-        <td>Playlist 3</td>
-        </tr>
+        {playlists.map( (x, i) => 
+            <tr key={i}>
+            <td onClick={() => handleClickPlaylist(x.name)} style={{cursor: "pointer"}}>{x.name}</td>
+            </tr>
+            )}
     </tbody>
     </table>
     )
