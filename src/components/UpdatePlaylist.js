@@ -1,9 +1,20 @@
+import { updatePlaylist } from "../utils"
 
+const UpdatePlaylist = ({ selectedPlaylist, cookies, setUser, closeModal, modalContent, setEditPlaylist, setPage  }) => {
 
-const UpdatePlaylist = ({ selectedPlaylist, cookies, setUser, closeModal, modalContent  }) => {
-
-    const handleSumbit = () => {
-        // Delete playlist
+    const handleUpdatePlaylist = async () => {
+        const status = await updatePlaylist(    
+            selectedPlaylist.name,
+            selectedPlaylist.playlist,
+            cookies,
+            setUser
+            )
+        if (status !== 200) {
+            alert("An error occured.")
+        }
+        closeModal()
+        setEditPlaylist(false)
+        setPage(1)
     }
 
     return (
@@ -18,7 +29,7 @@ const UpdatePlaylist = ({ selectedPlaylist, cookies, setUser, closeModal, modalC
     </form>
     <div >
             <div className="modal-footer mt-4">
-                <button type="button" className="btn btn-success" onClick={handleSumbit}>{modalContent}</button>
+                <button type="button" className="btn btn-success" onClick={handleUpdatePlaylist}>{modalContent}</button>
                 <button type="button" className="btn btn-secondary" data-dismiss="modal"  onClick={closeModal}>Close</button>
             </div>
             </div>

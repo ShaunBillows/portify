@@ -1,7 +1,8 @@
 import { useState } from "react"
 import Dropdown from "./Dropdown"
+import { mergePlaylists } from "../utils"
 
-const MergePlaylists = ({ playlists, closeModal, cookies, setUser, modalContent }) => {
+const MergePlaylists = ({ playlists, closeModal, cookies, setUser, modalContent, setEditPlaylist, setPage }) => {
 
     const [ input, setInput ] = useState("")
     const [ playlistsToMerge, setPlaylistsToMerge ] = useState([])
@@ -10,8 +11,27 @@ const MergePlaylists = ({ playlists, closeModal, cookies, setUser, modalContent 
         setInput(e.target.value)
     }
 
-    const handleSumbit = () => {
-        // merge playlists
+    const handleSumbit = async () => {
+        if (!input || playlistsToMerge.length < 2) {
+            return
+        }
+        if (playlists.some( x => x.name === input )) {
+            alert("You already have a playlist with that name.")
+        }
+        // console.log(playlists.filter( x => playlistsToMerge.includes(x.name) ));
+        const status = await mergePlaylists(
+            input,
+            playlists.filter( x => playlistsToMerge.includes(x.name) ),
+            cookies,
+            setUser
+        )
+        console.log(status);
+        if (status !== 200 ) {
+            alert("An error occured.")
+        }
+        closeModal()
+        setEditPlaylist(false)
+        setPage(1)
     }
 
     const handleSelectPlaylist = (option) => {
@@ -47,14 +67,11 @@ const MergePlaylists = ({ playlists, closeModal, cookies, setUser, modalContent 
         :
         null
     }
-    </form>
-    <div >
-            <div className="modal-footer mt-4 ">
+                <div className="modal-footer mt-4 ">
                 <button type="button" className="btn btn-success" onClick={handleSumbit}>{modalContent}</button>
                 <button type="button" className="btn btn-secondary" data-dismiss="modal"  onClick={closeModal}>Close</button>
             </div>
-            </div>
-
+    </form>
             </div>
     )
 }

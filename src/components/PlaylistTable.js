@@ -1,6 +1,6 @@
 
 
-const PlaylistTable = ({playlists, setSelectedPlaylist, setGenres, setTracks, setPage}) => {
+const PlaylistTable = ({playlists, setSelectedPlaylist, setGenres, setTracks, setPage, setEditPlaylist}) => {
 
     const handleClickPlaylist = async (playlistName) => {
         const selectedPlaylist = playlists.filter( x => x.name === playlistName )
@@ -9,6 +9,7 @@ const PlaylistTable = ({playlists, setSelectedPlaylist, setGenres, setTracks, se
         setGenres(["All", ...new Set(selectedPlaylist[0].playlist.map( x => x.genre))]);
         setTracks(selectedPlaylist[0].playlist)
         setPage(1)
+        setEditPlaylist(false)
     }
 
     return (

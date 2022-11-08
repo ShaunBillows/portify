@@ -1,4 +1,31 @@
 import { changeToken } from "./helpers";
+import { createSpotifyPlaylist, addTracksToSpotifyPlaylist } from "./spotifyClient";
+
+export const uploadPlaylist = async (
+  name, 
+  spotifyUserId, 
+  spotifyToken,
+  uris
+  ) => {
+    const newPlaylistId = await createSpotifyPlaylist(
+      name, 
+      spotifyUserId, 
+      spotifyToken
+    )
+    if (!newPlaylistId) {
+      alert("An error occured connecting to your spotify account.");
+    }
+    const successfullyAdded = addTracksToSpotifyPlaylist(
+      name, 
+      newPlaylistId, 
+      spotifyToken, 
+      uris
+    )
+    if (!successfullyAdded) {
+      alert("An error occured adding tracks to a new playlist.");
+    }
+
+}
 
 export const login = async (
     username,
@@ -85,15 +112,108 @@ export const login = async (
         }),
       });
       const data = await response.json();
-      console.log(data);
       if (response.status !== 200) {
         throw new Error("Incorred credentials.");
       }
-      setUser(data.user.user);
-      return 1;
+      setUser(data.user);
+      console.log(response.status);
+      return response.status;
     } catch (error) {
       console.log(error);
-      return 0;
     }
   };
   
+  export const mergePlaylists = async (
+    title,
+    playlists,
+    cookies,
+    setUser
+  ) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/merge`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: cookies.token,
+        },
+        body: JSON.stringify({
+          title: title,
+          playlists: playlists,
+        }),
+      });
+      const data = await response.json();
+      console.log(data.user.user);
+      if (response.status !== 200) {
+        throw new Error("Incorred credentials.");
+      }
+      console.log(data.user);
+      setUser(data.user);
+      console.log(response.status);
+      return response.status;
+    } catch (error) {
+      console.log(error);
+      return 0
+    }
+  };
+
+  export const deletePlaylist = async (
+    title,
+    playlist,
+    cookies,
+    setUser
+  ) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/playlist`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: cookies.token,
+        },
+        body: JSON.stringify({
+          title: title,
+          playlist: playlist,
+        }),
+      });
+      const data = await response.json();
+      console.log(data.user);
+      if (response.status !== 200) {
+        throw new Error("Incorred credentials.");
+      }
+      setUser(data.user);
+      console.log(response.status);
+      return response.status;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  export const updatePlaylist = async (
+    title,
+    newPlaylist,
+    cookies,
+    setUser
+  ) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/playlist`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: cookies.token,
+        },
+        body: JSON.stringify({
+          title: title,
+          newPlaylist: newPlaylist,
+        }),
+      });
+      const data = await response.json();
+      console.log(data.user);
+      if (response.status !== 200) {
+        throw new Error("Incorred credentials.");
+      }
+      setUser(data.user);
+      console.log(response.status);
+      return response.status;
+    } catch (error) {
+      console.log(error);
+    }
+  };

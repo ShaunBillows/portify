@@ -2,7 +2,7 @@ import Button from "../components/Button"
 import Dropdown from "../components/Dropdown"
 
 
-const SelectGenre = ({genres, setTracks, selectedPlaylist, setPage}) => {
+const SelectGenre = ({genres, setTracks, selectedPlaylist, setPage, setEditPlaylist}) => {
 
     const handleSelectGenre = (option) => {
         if (option.label === "All") {
@@ -11,6 +11,7 @@ const SelectGenre = ({genres, setTracks, selectedPlaylist, setPage}) => {
             setTracks(selectedPlaylist.playlist.filter( x => x.genre === option.label ));
         }
         setPage(1)
+        setEditPlaylist(false)
     }
 
     return (

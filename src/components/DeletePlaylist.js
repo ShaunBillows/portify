@@ -1,23 +1,31 @@
 import { useState } from "react"
 import Dropdown from "./Dropdown"
+import { deletePlaylist } from "../utils"
 
 
-const DeletePlaylist = ({ playlists, cookies, setUser, closeModal, modalContent  }) => {
+const DeletePlaylist = ({ playlists, cookies, setUser, closeModal, modalContent, setEditPlaylist, setPage  }) => {
 
-    const [ input, setInput ] = useState("")
     const [ playlistsToDelete, setPlaylistsToDelete ] = useState()
 
-    const handleChange = (e) => {
-        setInput(e.target.value)
-    }
-
-    const handleSumbit = () => {
-        // Delete playlist
+    const handleDeletePlaylist = async () => {
+        // console.log(playlists.filter( x => x.name === playlistsToDelete )[0].playlist);
+        if (!playlistsToDelete) {return}
+        const status = await deletePlaylist(
+            playlistsToDelete,
+            playlists.filter( x => x.name === playlistsToDelete )[0].playlist,
+            cookies,
+            setUser
+        )
+        if (status !== 200 ) {
+            alert("An error occured.")
+        }
+        closeModal()
+        setEditPlaylist(false)
+        setPage(1)
     }
 
     const handleSelectPlaylist = (option) => {
         setPlaylistsToDelete(option.label)
-        // console.log(option);
     }
 
     return (
@@ -42,13 +50,14 @@ const DeletePlaylist = ({ playlists, cookies, setUser, closeModal, modalContent 
         :
         null
     }
-    </form>
-    <div >
             <div className="modal-footer mt-4">
-                <button type="button" className="btn btn-success" onClick={handleSumbit}>{modalContent}</button>
+                <button type="button" className="btn btn-success" onClick={handleDeletePlaylist}>{modalContent}</button>
                 <button type="button" className="btn btn-secondary" data-dismiss="modal"  onClick={closeModal}>Close</button>
             </div>
-            </div>
+    </form>
+
+
+
     </div>
     )
 }

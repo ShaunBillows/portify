@@ -3,19 +3,22 @@ import CopyPlaylist from "../components/CopyPlaylist"
 import MergePlaylists from "./MergePlaylists";
 import DeletePlaylist from "./DeletePlaylist";
 import UpdatePlaylist from "./UpdatePlaylist";
+import UploadPlaylist from "./UploadPlaylist";
 
-const Modal = ({title, closeModal, submitButton, submitText, modalContent, playlists, tracks, selectedPlaylist, cookies, setUser}) => {
+const Modal = ({title, closeModal, submitButton, submitText, modalContent, playlists, tracks, selectedPlaylist, cookies, setUser, setPage, setEditPlaylist}) => {
 
     const handleOpenModal = () => {
         switch(modalContent) {
             case 'Copy Playlist':
-                return <CopyPlaylist tracks={tracks} cookies={cookies} setUser={setUser} closeModal={closeModal} modalContent={modalContent}/>;
+                return <CopyPlaylist tracks={tracks} cookies={cookies} setUser={setUser} closeModal={closeModal} modalContent={modalContent} playlists={playlists} setEditPlaylist={setEditPlaylist} setPage={setPage}/>;
             case 'Merge Playlists':
-                return <MergePlaylists playlists={playlists} cookies={cookies} setUser={setUser} closeModal={closeModal} modalContent={modalContent}/>;
+                return <MergePlaylists playlists={playlists} cookies={cookies} setUser={setUser} closeModal={closeModal} modalContent={modalContent} setEditPlaylist={setEditPlaylist} setPage={setPage}/>;
             case 'Delete Playlist':
-                return <DeletePlaylist playlists={playlists} cookies={cookies} setUser={setUser} closeModal={closeModal} modalContent={modalContent}/>;
+                return <DeletePlaylist playlists={playlists} cookies={cookies} setUser={setUser} closeModal={closeModal} modalContent={modalContent} setEditPlaylist={setEditPlaylist} setPage={setPage}/>;
             case 'Update Playlist':
-                return <UpdatePlaylist selectedPlaylist={selectedPlaylist} cookies={cookies} setUser={setUser} closeModal={closeModal} modalContent={modalContent}/>;
+                return <UpdatePlaylist selectedPlaylist={selectedPlaylist} cookies={cookies} setUser={setUser} closeModal={closeModal} modalContent={modalContent} setEditPlaylist={setEditPlaylist} setPage={setPage}/>;
+            case 'Upload Playlist':
+                return <UploadPlaylist selectedPlaylist={selectedPlaylist} cookies={cookies} setUser={setUser} closeModal={closeModal} modalContent={modalContent} setEditPlaylist={setEditPlaylist} setPage={setPage}/>;
             default:
               return '';
           }

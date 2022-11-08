@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar"
-import Form from "../components/Form"
+import UploadPlaylist from "../components/UploadPlaylist"
 import Header from "../components/Header"
 
 const Home = ({logout}) => {
@@ -8,7 +8,7 @@ const Home = ({logout}) => {
         <Navbar logout={logout}/>
         <div className="container-lg mt-3 py-3">
         <Header title={"Upload Playlist"}/>
-        <Form/>
+        <UploadPlaylist/>
         </div>
         </>
 
