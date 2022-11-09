@@ -1,32 +1,6 @@
 import { changeToken } from "./helpers";
 import { createSpotifyPlaylist, addTracksToSpotifyPlaylist } from "./spotifyClient";
 
-export const uploadPlaylist = async (
-  name, 
-  spotifyUserId, 
-  spotifyToken,
-  uris
-  ) => {
-    const newPlaylistId = await createSpotifyPlaylist(
-      name, 
-      spotifyUserId, 
-      spotifyToken
-    )
-    if (!newPlaylistId) {
-      alert("An error occured connecting to your spotify account.");
-    }
-    const successfullyAdded = addTracksToSpotifyPlaylist(
-      name, 
-      newPlaylistId, 
-      spotifyToken, 
-      uris
-    )
-    if (!successfullyAdded) {
-      alert("An error occured adding tracks to a new playlist.");
-    }
-
-}
-
 export const login = async (
     username,
     password,
@@ -39,8 +13,8 @@ export const login = async (
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: "shaun",
-          pass: "shaunssupersecretpassword",
+          username: username,
+          pass: password,
         }),
       });
       const data = await response.json();
@@ -217,3 +191,32 @@ export const login = async (
       console.log(error);
     }
   };
+
+  export const uploadPlaylist = async (
+    name, 
+    spotifyUserId, 
+    spotifyToken,
+    uris
+    ) => {
+      const newPlaylistId = await createSpotifyPlaylist(
+        name, 
+        spotifyUserId, 
+        spotifyToken
+      )
+      if (!newPlaylistId) {
+        console.log("An error occured connecting to your spotify account.");
+        return
+      }
+      await setTimeout( async () => {
+  
+      const successfullyAdded = await addTracksToSpotifyPlaylist(
+        newPlaylistId,
+        spotifyToken, 
+        uris
+      )
+      if (!successfullyAdded) {
+        return
+      }
+    }, 1000);
+    return true
+  }

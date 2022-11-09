@@ -18,7 +18,7 @@ const Modal = ({title, closeModal, submitButton, submitText, modalContent, playl
             case 'Update Playlist':
                 return <UpdatePlaylist selectedPlaylist={selectedPlaylist} cookies={cookies} setUser={setUser} closeModal={closeModal} modalContent={modalContent} setEditPlaylist={setEditPlaylist} setPage={setPage}/>;
             case 'Upload Playlist':
-                return <UploadPlaylist selectedPlaylist={selectedPlaylist} cookies={cookies} setUser={setUser} closeModal={closeModal} modalContent={modalContent} setEditPlaylist={setEditPlaylist} setPage={setPage}/>;
+                return <UploadPlaylist selectedPlaylist={selectedPlaylist} closeModal={closeModal} setEditPlaylist={setEditPlaylist} setPage={setPage}/>;
             default:
               return '';
           }

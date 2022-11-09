@@ -27,10 +27,8 @@ const TracksTable = ({tracks, setTracks, editPlaylist, selectedPlaylist, setSele
     }
 
     return (
-    <>
-
-
-    <table class="table table-hover table-dark table-responsive " id="bootstrap-override">
+    <div className="table-responsive" style={{borderRadius: "6px"}}>
+    <table class="table table-hover table-dark " id="bootstrap-override" style={{whiteSpace:"wrp"}}>
     <thead>
         <tr>
         <th scope="col">#</th>
@@ -64,23 +62,20 @@ const TracksTable = ({tracks, setTracks, editPlaylist, selectedPlaylist, setSele
     {
         tracks.length > tracksPerPage
         ?
-        < div className="row">
-            <div className="col-9">
+        < div className="row d-flex justify-content-end bg-dark py-3 ">
 
-            </div >
-            <div className="col-1 bg-dark d-flex justify-content-center align-items-center me-2"  onClick={handleDecrementPage}  style={{cursor: "pointer"}}>
+            <button className="btn bg-success d-flex justify-content-center align-items-center  p-1 py-2 me-3"  onClick={handleDecrementPage}  style={{cursor: "pointer", width: "70px"}}>
             <FontAwesomeIcon  icon={faBackward}/>
-            </div>
-            <div className="col-1 bg-dark  d-flex justify-content-center align-items-center p-1 py-2" onClick={handleIncrementPage}  style={{cursor: "pointer"}}>
+            </button>
+            <button className="btn bg-success  d-flex justify-content-center align-items-center p-1 py-2 me-lg-5 me-4" onClick={handleIncrementPage}  style={{cursor: "pointer", width: "70px"}}>
             <FontAwesomeIcon  icon={faForward}/>
-            </div>
-            <div className="col-1">
-            </div>
+            </button>
+        
         </div>
         :
         null
     }
-    </>
+    </div>
     )
 }
 

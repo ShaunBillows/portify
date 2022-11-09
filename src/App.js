@@ -46,8 +46,6 @@ const App = () => {
         </Route>
         <Route path='/create' element={<Protected isLoggedIn={isLoggedIn}><Create logout={logout} user={user} cookies={cookies} setUser={setUser}/></Protected>} >
         </Route>
-        <Route path='/add' element={<Protected isLoggedIn={isLoggedIn}><Add logout={logout} user={user}/></Protected>} >
-        </Route>
       </Routes>
   </Router>
   );

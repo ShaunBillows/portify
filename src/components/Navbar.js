@@ -23,9 +23,6 @@ const Navbar = ({logout}) => {
             <a className="nav-link" href="/create">Browse & Create</a>
         </li>
         <li className="nav-item">
-            <a className="nav-link" href="/add">Upload</a>
-        </li>
-        <li className="nav-item">
             <a className="nav-link" onClick={handleClickLogout}>Log out</a>
         </li>
         </ul>

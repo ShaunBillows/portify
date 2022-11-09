@@ -37,7 +37,7 @@ const Login = ({setUser,
             </div>
             <div className="form-group mt-2">
                 <label for="formGroupExampleInput2">Password</label>
-                <input type="text" className="form-control" value={passwordInput} onChange={handlePasswordChange}  placeholder="Enter password"></input>
+                <input type="password" className="form-control" value={passwordInput} onChange={handlePasswordChange}  placeholder="Enter password"></input>
             </div>
             </form>
             <div className="mt-5 d-flex justify-content-center w-100">

@@ -13,6 +13,7 @@ const PlaylistTable = ({playlists, setSelectedPlaylist, setGenres, setTracks, se
     }
 
     return (
+        <div className="table-responsive rounded" >
     <table class="table table-hover table-dark" id="bootstrap-override">
     <thead>
         <tr>
@@ -27,6 +28,7 @@ const PlaylistTable = ({playlists, setSelectedPlaylist, setGenres, setTracks, se
             )}
     </tbody>
     </table>
+    </div>
     )
 }
 

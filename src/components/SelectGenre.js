@@ -16,14 +16,14 @@ const SelectGenre = ({genres, setTracks, selectedPlaylist, setPage, setEditPlayl
 
     return (
         <>
-            <label className=" me-1 mb-1" >Filter by genre</label>
+            <p className=" me-1 mb-1 m-0 p-0" style={{fontWeight: "600", color: "black", letterSpacing: "0.03rem"}} >Filter by genre</p>
             {
             genres.length < 0
             ?
             genres.map( (genre, i) => <Button genre={genre} key={i} selectedPlaylist={selectedPlaylist} setTracks={setTracks}/>)
             :
             <div className="d-flex justify-content-end align-items-center  mt-0">
-            <div className="" style={{width: "300px"}}>
+            <div className="" style={{maxWidth: "300", width: "100%"}}>
             <Dropdown options={genres} text={"Select genre"} func={handleSelectGenre} color={"#212121"}/>
             </div>
             </div>
