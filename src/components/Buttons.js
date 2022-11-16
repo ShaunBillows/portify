@@ -34,12 +34,26 @@ const FunctionButtons = ({
     <>
       <div className="col d-flex align-items-center">
         <div>
-        <h3 className="px-2  my-2 ms-1 text-dk" style={{fontWeight: "700", color: "black", letterSpacing: "0.05rem"}}>
-          Playlist:
-        </h3>
-        <h4 className="px-2 ms-1  text-rk" style={{fontWeight: "600", color: "black", letterSpacing: "0.05rem"}}>
-          {selectedPlaylist && selectedPlaylist.name}
-        </h4>
+          <h3
+            className="px-2  my-2 ms-1 text-dk"
+            style={{
+              fontWeight: "700",
+              color: "black",
+              letterSpacing: "0.05rem",
+            }}
+          >
+            Playlist:
+          </h3>
+          <h4
+            className="px-2 ms-1  text-rk"
+            style={{
+              fontWeight: "700",
+              color: "black",
+              letterSpacing: "0.05rem",
+            }}
+          >
+            {selectedPlaylist && selectedPlaylist.name}
+          </h4>
         </div>
       </div>
       <div className="col d-flex align-items-center justify-content-end me-2 ">
@@ -47,7 +61,7 @@ const FunctionButtons = ({
           <button
             type="button"
             onClick={handleClickCreate}
-            className="btn btn-light m-1"
+            className="btn btn-primary m-1"
           >
             Update
           </button>
@@ -58,7 +72,15 @@ const FunctionButtons = ({
       <div className="row  m-0   ">
         <div className="col ">
           <div className="text-end pe-1">
-            <label style={{fontWeight: "600", color: "black", letterSpacing: "0.03rem"}}>Playlist Functions</label>
+            <label
+              style={{
+                fontWeight: "700",
+                color: "black",
+                letterSpacing: "0.03rem",
+              }}
+            >
+              Playlist Functions
+            </label>
           </div>
           <button
             type="button"
@@ -91,7 +113,7 @@ const FunctionButtons = ({
           <button
             type="button"
             onClick={handleClickUpload}
-            className="btn btn-light ms-2 float-end mt-1"
+            className="btn btn-success ms-2 float-end mt-1 "
           >
             Upload
           </button>

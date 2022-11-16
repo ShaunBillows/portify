@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
-import Add from "./pages/Add";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Create from "./pages/Create";
 import Home from "./pages/Home";
 import Protected from "./components/Protected";
@@ -12,9 +7,7 @@ import { useCookies } from "react-cookie";
 import { checkToken } from "./utils";
 import Login from "./pages/Login";
 
-
 const App = () => {
-
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [cookies, setCookie] = useCookies(["token"]);
   const [user, setUser] = useState("");
@@ -25,15 +18,17 @@ const App = () => {
   }, []);
 
   const logout = () => {
-    setCookie(["token"])
-    setUser("")
-    setIsLoggedIn(false)
-  }
+    setCookie(["token"]);
+    setUser("");
+    setIsLoggedIn(false);
+  };
 
   return (
     <Router>
       <Routes>
-      <Route path="/login" element={
+        <Route
+          path="/login"
+          element={
             <Login
               setIsLoggedIn={setIsLoggedIn}
               setCookie={setCookie}
@@ -41,14 +36,30 @@ const App = () => {
             />
           }
         />
-        <Route path='/' element={<Protected isLoggedIn={isLoggedIn}><Home logout={logout} user={user}
-        /></Protected>} >
-        </Route>
-        <Route path='/create' element={<Protected isLoggedIn={isLoggedIn}><Create logout={logout} user={user} cookies={cookies} setUser={setUser}/></Protected>} >
-        </Route>
+        <Route
+          path="/"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <Home logout={logout} user={user} />
+            </Protected>
+          }
+        ></Route>
+        <Route
+          path="/create"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <Create
+                logout={logout}
+                user={user}
+                cookies={cookies}
+                setUser={setUser}
+              />
+            </Protected>
+          }
+        ></Route>
       </Routes>
-  </Router>
+    </Router>
   );
-}
+};
 
 export default App;

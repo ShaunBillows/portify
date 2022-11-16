@@ -1,15 +1,11 @@
-import Navbar from "../components/Navbar"
-import Header from "../components/Header"
+import Navbar from "../components/Navbar";
 
-const Home = ({logout}) => {
-    return (
-        <>
-        <Navbar logout={logout}/>
-        {/* <div className="container-lg mt-3 py-3">
-            <Header title={"Welcome to Portify"}/>
-        </div> */}
-        </>
-    )
-}
+const Home = ({ logout }) => {
+  return (
+    <>
+      <Navbar logout={logout} />
+    </>
+  );
+};
 
-export default Home
+export default Home;
